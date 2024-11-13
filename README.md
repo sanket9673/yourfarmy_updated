@@ -1,12 +1,8 @@
-# MasterAI - AI Solutions Platform Website
-Deploymed Website - https://master-ai-xi.vercel.app/signin
-- (usernme, password) -> (admin, admin)
-
-**MasterAI** is an innovative web platform designed to provide cutting-edge artificial intelligence solutions. Our mission is to empower a diverse audience—from entrepreneurs to students—by equipping them with the tools and resources necessary to effectively leverage AI technologies in their respective fields.
+**YourFarmy** is a digital platform created to revolutionize agriculture by bridging the gap between farmers and consumers. Our mission is to empower farmers with modern farming tools, direct sales channels, and real-time data, while providing consumers with access to fresh, locally sourced produce. By facilitating direct interaction between farmers and consumers, YourFarmy promotes sustainable agriculture and strengthens community ties.
 
 ## Project Overview
 
-The **MasterAI** website functions as a comprehensive portal for users to explore a variety of AI solutions, fostering an engaging and informative experience. The platform is meticulously built with modern web technologies to ensure a seamless user experience, focusing on both functionality and accessibility.
+The **YourFarmy** website serves as a one-stop hub where farmers can list and sell their products directly to consumers, access modern farming resources, and engage in community support. Developed using the latest web technologies, the platform offers an intuitive and responsive interface designed to simplify farming processes and make agricultural products more accessible. Key features include crop yield prediction, government loan information, a chatbot assistant, and an e-commerce portal that supports order management, secure payments, and delivery tracking.
 
 ## Key Technologies
 
@@ -153,15 +149,15 @@ The application uses the Context API to manage authentication state globally. Th
 
 ## Getting Started
 
-To run the **MasterAI** website locally, please follow these steps:
+To run the **Yourfarmy** website locally, please follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/sanket9673/Master_AI.git
+   git clone https://github.com/sanket9673/yourfarmy_updated
 
 2. Install the necessary dependencies:
    ```bash
-   cd masterai
+   cd yourfarmy
 
 3. Install the necessary dependencies:
    ```bash
