@@ -1,0 +1,28 @@
+# Node modules
+**/node_modules/
+
+# Build output for React
+build/
+dist/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+**/package-lock.json
+**/yarn.lock
+
+# Environment files
+backend/.env
+frontend/.env
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE or editor configurations
+.vscode/
+.idea/
+*.swp
