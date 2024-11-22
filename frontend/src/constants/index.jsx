@@ -19,6 +19,8 @@ export const navItems = [
   { href: "/price", label: "Store" },
   { href: "/testimonials", label: "Ask me" },
   { label: 'About', href: '/about' },
+  { label: 'Report ', href: '/faq' },
+  { label: 'Community ', href: '/community' },
 ];
 
 export const testimonials = [

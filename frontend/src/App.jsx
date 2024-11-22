@@ -13,6 +13,8 @@ import FooterSection from './components/FooterSection';
 import { AuthContext, ContextProvider } from './contexts/AuthContext';
 import SignIn from './components/SignIn';
 import Register from './components/Register';
+import FAQ from './components/FAQ';
+import Community from './components/Community';
 
 // ProtectedRoute component to check authentication before rendering protected pages
 const ProtectedRoute = ({ element }) => {
@@ -38,6 +40,8 @@ function App() {
             <Route path="/price" element={<ProtectedRoute element={<Price />} />} />
             <Route path="/testimonials" element={<ProtectedRoute element={<Testimonials />} />} />
             <Route path="/about" element={<ProtectedRoute element={<About />} />} /> {/* Add About route */}
+            <Route path="/faq" element={<ProtectedRoute element={<FAQ />} />} /> {/* Add About route */}
+            <Route path="/community" element={<ProtectedRoute element={<Community />} />} />
 
             <Route path="/farmer-consumer" element={<ProtectedRoute element={<F_C />} />} />
             <Route path="/farmer-form" element={<ProtectedRoute element={<FarmerForm />} />} />
