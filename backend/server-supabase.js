@@ -1,12 +1,18 @@
 import cors from 'cors';
 
-// use FRONTEND_URL env var
 const allowedOrigins = [
-  process.env.FRONTEND_URL, 
-  'http://localhost:5173/' 
+  process.env.FRONTEND_URL,    // e.g. https://yourfarmy.vercel.app
+  'http://localhost:5173',     // Vite dev server (no trailing slash)
+  'http://localhost:3000'      // CRA dev server (optional)
 ];
-app.use(cors({ origin: (origin, cb) => cb(null, allowedOrigins.includes(origin) || !origin) }));
 
-// port
-const PORT = process.env.PORT || 8081;
-app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS blocked for origin: ${origin}`));
+    }
+  },
+  credentials: true
+}));
