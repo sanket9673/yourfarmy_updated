@@ -48,4 +48,5 @@ app.get('/', (req, res) => res.send('YourFarmy backend running'));
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
 
+
 // Rest of your routes (register, login, /api/chat, etc.) below...
