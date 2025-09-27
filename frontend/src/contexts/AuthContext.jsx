@@ -1,6 +1,15 @@
 import React from 'react';
 import { useSetState } from 'react-use';
 
+// Base API URL - uses VITE_API_URL from .env in development
+// Falls back to production URL if not set
+const API_BASE_URL = import.meta.env.VITE_API_URL || 
+  (import.meta.env.DEV 
+    ? 'http://localhost:8081' 
+    : 'https://yourfarmyupdated-production.up.railway.app');
+
+console.log('Using API base URL:', API_BASE_URL);  // For debugging
+
 const initialState = {
     isLoggedIn: false,
     isLoginPending: false,
@@ -22,7 +31,7 @@ export const ContextProvider = (props) => {
         setLoginError(null);
 
         try {
-            const response = await fetch('http://localhost:8081/login', {
+            const response = await fetch(`${API_BASE_URL}/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
@@ -43,7 +52,7 @@ export const ContextProvider = (props) => {
 
     const register = async (username, password, callback) => {
         try {
-            const response = await fetch('http://localhost:8081/register', {
+            const response = await fetch(`${API_BASE_URL}/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
