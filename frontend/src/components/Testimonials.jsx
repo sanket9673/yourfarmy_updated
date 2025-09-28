@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Markdown from 'react-markdown'
+import API_BASE_URL from '../services/api';
 
 const Testimonials = () => {
     const [chatInput, setChatInput] = useState("");
@@ -13,23 +14,41 @@ const Testimonials = () => {
         const userMessage = { role: 'user', content: chatInput };
         setChatMessages([...chatMessages, userMessage]);
 
-        try {
-            // Send user message to server
-            const response = await fetch("http://localhost:8081/api/chat", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ message: chatInput }),
-            });
-            const data = await response.json();
+        // try {
+        //     // Send user message to server
+        //     const response = await fetch("http://localhost:8081/api/chat", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify({ message: chatInput }),
+        //     });
+        //     const data = await response.json();
             
+        //     // Append bot response to chat
+        //     const botMessage = { role: 'bot', content: data.reply };
+        //     setChatMessages((prevMessages) => [...prevMessages, botMessage]);
+        // } catch (error) {
+        //     console.error("Error sending message:", error);
+        // }
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/chat`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ message: chatInput }),
+            });
+            
+            const data = await response.json();
+          
             // Append bot response to chat
             const botMessage = { role: 'bot', content: data.reply };
             setChatMessages((prevMessages) => [...prevMessages, botMessage]);
-        } catch (error) {
+          
+          } catch (error) {
             console.error("Error sending message:", error);
-        }
+          }
 
         // Clear the chat input field
         setChatInput("");
