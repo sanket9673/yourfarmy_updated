@@ -6,7 +6,7 @@ import { useSetState } from 'react-use';
 const API_BASE_URL = import.meta.env.VITE_API_URL || 
   (import.meta.env.DEV 
     ? 'http://localhost:8081' 
-    : 'https://yourfarmyupdated-production.up.railway.app');
+    : 'https://yourfarmyupdated-production.up.railway.app/');
 
 console.log('Using API base URL:', API_BASE_URL);  // For debugging
 
