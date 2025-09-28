@@ -88,7 +88,7 @@
 // AuthContext.jsx
 import React from 'react';
 import { useSetState } from 'react-use';
-import API_BASE_URL from './services/api';
+import API_BASE_URL from '../services/api';
 
 // Initial auth state
 const initialState = {

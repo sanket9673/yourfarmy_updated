@@ -5,8 +5,8 @@
 // src/services/api.js
 function normalizeBase(url) {
     if (!url) return url;
-    if (!/^https?:\/\//i.test(url)) url = 'https://' + url; // ensure protocol
-    return url.replace(/\/+$/, ''); // remove ALL trailing slashes
+    if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+    return url.replace(/\/+$/, '');
   }
   
   const envBase = import.meta.env.VITE_API_URL;
