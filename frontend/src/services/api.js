@@ -18,5 +18,5 @@ function normalizeBase(url) {
   
   console.log('✅ Using API base URL:', API_BASE_URL);
   
-  export default API_BASE_URL;
+export default API_BASE_URL;
   
