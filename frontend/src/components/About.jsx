@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from '../services/api';
 
 const About = () => {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
