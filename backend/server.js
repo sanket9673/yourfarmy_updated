@@ -253,6 +253,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
+import { spawn } from 'child_process';
 
 dotenv.config();
 const app = express();
@@ -398,8 +399,26 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
+// ✅ Start Python FastAPI Microservice Internally
+const pythonProcess = spawn('uvicorn', ['main:app', '--reload', '--port', '8001'], {
+  cwd: '../backend-forecast',
+  shell: true
+});
+
+pythonProcess.stdout.on('data', (data) => {
+  console.log(`[Python API] ${data.toString().trim()}`);
+});
+
+pythonProcess.stderr.on('data', (data) => {
+  console.log(`[Python API INFO] ${data.toString().trim()}`); 
+});
+
+pythonProcess.on('close', (code) => {
+  console.log(`[Python API] Exited with code ${code}`);
+});
+
 // ✅ Start server locally
 const PORT = 8081;
 app.listen(PORT, () => {
-  console.log(`✅ Local server running on http://localhost:${PORT}`);
+  console.log(`✅ Local Node server running on http://localhost:${PORT}`);
 });
