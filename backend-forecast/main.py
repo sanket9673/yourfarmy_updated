@@ -4,7 +4,7 @@ import time
 import asyncio
 from typing import List, Dict, Any
 
-from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, Column, Integer, String, Float, Text
 from sqlalchemy.orm import declarative_base, sessionmaker
@@ -241,3 +241,69 @@ async def get_metrics():
         "error_rate_percent": metrics["error_rate"],
         "total_requests": metrics["total_requests"]
     }
+
+@app.get("/forecast/history")
+async def get_forecast_history():
+    db = SessionLocal()
+    try:
+        history = db.query(ForecastHistory).all()
+        result = []
+        for entry in history:
+            try:
+                inp = json.loads(entry.input_data)
+            except Exception:
+                inp = entry.input_data
+            try:
+                pred = json.loads(entry.prediction)
+            except Exception:
+                pred = entry.prediction
+            result.append({
+                "id": entry.id,
+                "input_data": inp,
+                "prediction": pred,
+                "explanation": entry.explanation,
+                "latency_ms": entry.latency_ms
+            })
+        return result
+    except Exception as e:
+        return {"error": str(e)}
+    finally:
+        db.close()
+
+@app.get("/forecast/history/{entry_id}")
+async def get_forecast_entry(entry_id: int):
+    db = SessionLocal()
+    try:
+        entry = db.query(ForecastHistory).filter(ForecastHistory.id == entry_id).first()
+        if not entry:
+            raise HTTPException(status_code=404, detail="Forecast history entry not found")
+        try:
+            inp = json.loads(entry.input_data)
+        except Exception:
+            inp = entry.input_data
+        try:
+            pred = json.loads(entry.prediction)
+        except Exception:
+            pred = entry.prediction
+        return {
+            "id": entry.id,
+            "input_data": inp,
+            "prediction": pred,
+            "explanation": entry.explanation,
+            "latency_ms": entry.latency_ms
+        }
+    finally:
+        db.close()
+
+@app.delete("/forecast/history/{entry_id}")
+async def delete_forecast_entry(entry_id: int):
+    db = SessionLocal()
+    try:
+        entry = db.query(ForecastHistory).filter(ForecastHistory.id == entry_id).first()
+        if not entry:
+            raise HTTPException(status_code=404, detail="Forecast history entry not found")
+        db.delete(entry)
+        db.commit()
+        return {"success": True, "message": f"Forecast entry {entry_id} deleted successfully"}
+    finally:
+        db.close()
